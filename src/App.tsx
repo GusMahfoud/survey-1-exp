@@ -8,6 +8,7 @@ import { Layout } from "./components/Layout";
 import { Dashboard } from "./pages/Dashboard";
 import { Surveys } from "./pages/Surveys";
 import { Analytics } from "./pages/Analytics";
+import { SurveyResponse } from "./pages/SurveyResponse";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -18,16 +19,23 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/surveys" element={<Surveys />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/jobs" element={<Dashboard />} />
-            <Route path="/settings" element={<Dashboard />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          {/* Admin routes with layout */}
+          <Route path="/admin" element={<Layout><Dashboard /></Layout>} />
+          <Route path="/admin/surveys" element={<Layout><Surveys /></Layout>} />
+          <Route path="/admin/analytics" element={<Layout><Analytics /></Layout>} />
+          <Route path="/admin/jobs" element={<Layout><Dashboard /></Layout>} />
+          <Route path="/admin/settings" element={<Layout><Dashboard /></Layout>} />
+          
+          {/* Public survey response route */}
+          <Route path="/survey/:surveyId" element={<SurveyResponse />} />
+          <Route path="/" element={<Layout><Dashboard /></Layout>} />
+          <Route path="/surveys" element={<Layout><Surveys /></Layout>} />
+          <Route path="/analytics" element={<Layout><Analytics /></Layout>} />
+          <Route path="/jobs" element={<Layout><Dashboard /></Layout>} />
+          <Route path="/settings" element={<Layout><Dashboard /></Layout>} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
