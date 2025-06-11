@@ -7,6 +7,8 @@ import { Layout } from "./components/Layout";
 import { Dashboard } from "./pages/Dashboard";
 import { Surveys } from "./pages/Surveys";
 import { Analytics } from "./pages/Analytics";
+import { AdminDashboard } from "./pages/AdminDashboard";
+import { RespondentSurvey } from "./pages/RespondentSurvey";
 import { SurveyResponse } from "./pages/SurveyResponse";
 import NotFound from "./pages/NotFound";
 
@@ -19,15 +21,19 @@ const App = () => (
     <BrowserRouter>
       <Routes>
         {/* Admin routes with layout */}
-        <Route path="/admin" element={<Layout><Dashboard /></Layout>} />
+        <Route path="/admin" element={<Layout><AdminDashboard /></Layout>} />
+        <Route path="/admin/dashboard" element={<Layout><AdminDashboard /></Layout>} />
         <Route path="/admin/surveys" element={<Layout><Surveys /></Layout>} />
         <Route path="/admin/analytics" element={<Layout><Analytics /></Layout>} />
         <Route path="/admin/jobs" element={<Layout><Dashboard /></Layout>} />
         <Route path="/admin/settings" element={<Layout><Dashboard /></Layout>} />
         
-        {/* Public survey response route */}
+        {/* Public survey response routes */}
         <Route path="/survey/:surveyId" element={<SurveyResponse />} />
-        <Route path="/" element={<Layout><Dashboard /></Layout>} />
+        <Route path="/respond/:surveyId" element={<RespondentSurvey />} />
+        
+        {/* Default admin routes */}
+        <Route path="/" element={<Layout><AdminDashboard /></Layout>} />
         <Route path="/surveys" element={<Layout><Surveys /></Layout>} />
         <Route path="/analytics" element={<Layout><Analytics /></Layout>} />
         <Route path="/jobs" element={<Layout><Dashboard /></Layout>} />
