@@ -1,11 +1,13 @@
+
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { X, Plus } from 'lucide-react';
+import { X, Plus, ArrowLeft } from 'lucide-react';
 import {
   Drawer,
   DrawerClose,
@@ -46,6 +48,7 @@ export const SurveyBuilder = () => {
   const [surveyTitle, setSurveyTitle] = useState('');
   const [surveyDescription, setSurveyDescription] = useState('');
   const [questions, setQuestions] = useState<Question[]>([]);
+  const navigate = useNavigate();
 
   const addQuestion = () => {
     const newQuestion: Question = {
@@ -95,7 +98,13 @@ export const SurveyBuilder = () => {
             <p className="text-muted-foreground">Create your survey by adding questions below.</p>
           </div>
         </div>
-        <Button onClick={handleSaveSurvey}>Save Survey</Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={() => navigate('/admin/surveys')}>
+            <ArrowLeft className="mr-2" />
+            Back to Surveys
+          </Button>
+          <Button onClick={handleSaveSurvey}>Save Survey</Button>
+        </div>
       </div>
 
       <Card>
