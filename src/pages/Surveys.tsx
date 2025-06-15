@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -14,13 +15,14 @@ type Survey = {
   id: number;
   title: string;
   description: string;
-  status: "active" | "draft" | "completed" | "paused";
+  status: "active" | "draft";
   responses: number;
   created: string;
   lastModified: string;
 };
 
 export const Surveys = () => {
+  const navigate = useNavigate();
   const [surveys, setSurveys] = useState<Survey[]>([
     {
       id: 1,
@@ -44,7 +46,7 @@ export const Surveys = () => {
       id: 3,
       title: "Employee NPS Survey",
       description: "Internal employee satisfaction measurement",
-      status: "completed",
+      status: "active",
       responses: 156,
       created: "2024-01-10",
       lastModified: "2024-01-25"
@@ -98,27 +100,13 @@ export const Surveys = () => {
     });
   };
 
-  const handleStatusChange = (surveyId: number, newStatus: string) => {
-    setSurveys(surveys.map(survey => 
-      survey.id === surveyId 
-        ? { ...survey, status: newStatus as Survey['status'], lastModified: new Date().toISOString().split('T')[0] }
-        : survey
-    ));
-    
+  const handleDeleteSurvey = (surveyId: number) => {
+    setSurveys(surveys.filter(survey => survey.id !== surveyId));
     toast({
-      title: "Status updated",
-      description: `Survey status changed to ${newStatus}.`,
+      title: "Survey deleted",
+      description: "The survey has been successfully deleted.",
+      variant: "destructive"
     });
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'active': return 'bg-green-500';
-      case 'completed': return 'bg-blue-500';
-      case 'draft': return 'bg-yellow-500';
-      case 'paused': return 'bg-orange-500';
-      default: return 'bg-gray-500';
-    }
   };
 
   const copyShareLink = (surveyId: number) => {
@@ -186,7 +174,6 @@ export const Surveys = () => {
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <h3 className="text-lg font-semibold">{survey.title}</h3>
-                    <div className={`w-3 h-3 rounded-full ${getStatusColor(survey.status)}`}></div>
                     <Badge variant={survey.status === 'active' ? 'default' : 'secondary'}>
                       {survey.status}
                     </Badge>
@@ -205,35 +192,16 @@ export const Surveys = () => {
                   <Button variant="ghost" size="sm" onClick={() => handleOpenSendDialog(survey)} title="Send Survey">
                     <Send size={16} />
                   </Button>
-                  <Button variant="ghost" size="sm" onClick={() => copyShareLink(survey.id)}>
+                  <Button variant="ghost" size="sm" onClick={() => copyShareLink(survey.id)} title="Copy Link">
                     <Copy size={16} />
                   </Button>
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" onClick={() => window.open(`/respond/${survey.id}`, '_blank')} title="Preview Survey">
                     <Eye size={16} />
                   </Button>
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" onClick={() => navigate(`/admin/surveys/new`)} title="Edit Survey">
                     <Edit size={16} />
                   </Button>
-                  {survey.status === 'draft' && (
-                    <Button 
-                      size="sm" 
-                      onClick={() => handleStatusChange(survey.id, 'active')}
-                      className="flex items-center gap-1"
-                    >
-                      <Send size={14} />
-                      Publish
-                    </Button>
-                  )}
-                  {survey.status === 'active' && (
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      onClick={() => handleStatusChange(survey.id, 'paused')}
-                    >
-                      Pause
-                    </Button>
-                  )}
-                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600">
+                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600" onClick={() => handleDeleteSurvey(survey.id)} title="Delete Survey">
                     <Trash2 size={16} />
                   </Button>
                 </div>
