@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -16,7 +15,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer"
+} from "@/components/ui/drawer";
+import { Textarea } from '@/components/ui/textarea';
+import { toast } from "sonner";
 
 type QuestionType = 'text' | 'rating' | 'multiple-choice';
 
@@ -41,6 +42,8 @@ const templateQuestions = [
 ];
 
 export const SurveyBuilder = () => {
+  const [surveyTitle, setSurveyTitle] = useState('');
+  const [surveyDescription, setSurveyDescription] = useState('');
   const [questions, setQuestions] = useState<Question[]>([]);
 
   const addQuestion = () => {
@@ -69,6 +72,18 @@ export const SurveyBuilder = () => {
       setQuestions(questions.map(q => q.id === id ? {...q, [field]: value} : q))
   }
 
+  const handleSaveSurvey = () => {
+    const surveyData = {
+      title: surveyTitle,
+      description: surveyDescription,
+      questions: questions,
+    };
+    console.log("Saving survey:", surveyData);
+    toast.success("Survey saved successfully!", {
+      description: "You can continue editing or come back later.",
+    });
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -76,8 +91,34 @@ export const SurveyBuilder = () => {
           <h1 className="text-3xl font-bold">Survey Builder</h1>
           <p className="text-muted-foreground">Create your survey by adding questions below.</p>
         </div>
-        <Button>Save Survey</Button>
+        <Button onClick={handleSaveSurvey}>Save Survey</Button>
       </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Survey Details</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <Label htmlFor="survey-title">Survey Title</Label>
+            <Input
+              id="survey-title"
+              placeholder="e.g., Employee Satisfaction Survey"
+              value={surveyTitle}
+              onChange={(e) => setSurveyTitle(e.target.value)}
+            />
+          </div>
+          <div>
+            <Label htmlFor="survey-description">Survey Description</Label>
+            <Textarea
+              id="survey-description"
+              placeholder="A brief description of the survey's purpose."
+              value={surveyDescription}
+              onChange={(e) => setSurveyDescription(e.target.value)}
+            />
+          </div>
+        </CardContent>
+      </Card>
       
       <div className="space-y-4">
         {questions.map((q, index) => (

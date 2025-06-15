@@ -4,8 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MetricCard } from "@/components/MetricCard";
 import { AnalyticsChart } from "@/components/AnalyticsChart";
-import { SystemStatus } from "@/components/SystemStatus";
-import { JobQueue } from "@/components/JobQueue";
 import { Plus, Send, BarChart3, Database, Users } from "lucide-react";
 import { Link } from 'react-router-dom';
 
