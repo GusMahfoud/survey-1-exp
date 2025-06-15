@@ -7,9 +7,20 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Send, Edit, Trash2, Eye, Copy } from "lucide-react";
+import { SendSurveyDialog } from './SendSurveyDialog';
+
+type Survey = {
+  id: number;
+  title: string;
+  description: string;
+  status: "active" | "draft" | "completed" | "paused";
+  responses: number;
+  created: string;
+  lastModified: string;
+};
 
 export const SurveyManagement = () => {
-  const [surveys, setSurveys] = useState([
+  const [surveys, setSurveys] = useState<Survey[]>([
     {
       id: 1,
       title: "Customer Satisfaction Q4 2024",
@@ -48,6 +59,14 @@ export const SurveyManagement = () => {
   
   const { toast } = useToast();
 
+  const [isSendDialogOpen, setIsSendDialogOpen] = useState(false);
+  const [selectedSurvey, setSelectedSurvey] = useState<Survey | null>(null);
+
+  const handleOpenSendDialog = (survey: Survey) => {
+    setSelectedSurvey(survey);
+    setIsSendDialogOpen(true);
+  };
+
   const handleCreateSurvey = () => {
     if (!newSurvey.title.trim()) {
       toast({
@@ -58,11 +77,11 @@ export const SurveyManagement = () => {
       return;
     }
 
-    const survey = {
+    const survey: Survey = {
       id: surveys.length + 1,
       title: newSurvey.title,
       description: newSurvey.description,
-      status: "draft" as const,
+      status: "draft",
       responses: 0,
       created: new Date().toISOString().split('T')[0],
       lastModified: new Date().toISOString().split('T')[0]
@@ -81,7 +100,7 @@ export const SurveyManagement = () => {
   const handleStatusChange = (surveyId: number, newStatus: string) => {
     setSurveys(surveys.map(survey => 
       survey.id === surveyId 
-        ? { ...survey, status: newStatus as any, lastModified: new Date().toISOString().split('T')[0] }
+        ? { ...survey, status: newStatus as Survey['status'], lastModified: new Date().toISOString().split('T')[0] }
         : survey
     ));
     
@@ -181,6 +200,9 @@ export const SurveyManagement = () => {
                 </div>
 
                 <div className="flex items-center gap-2">
+                  <Button variant="ghost" size="sm" onClick={() => handleOpenSendDialog(survey)} title="Send Survey">
+                    <Send size={16} />
+                  </Button>
                   <Button variant="ghost" size="sm" onClick={() => copyShareLink(survey.id)}>
                     <Copy size={16} />
                   </Button>
@@ -218,6 +240,11 @@ export const SurveyManagement = () => {
           </Card>
         ))}
       </div>
+      <SendSurveyDialog 
+        survey={selectedSurvey}
+        isOpen={isSendDialogOpen}
+        onOpenChange={setIsSendDialogOpen}
+      />
     </div>
   );
 };
