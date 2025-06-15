@@ -1,5 +1,4 @@
 
-```typescript
 import React from 'react';
 import { MetricCard } from '../components/MetricCard';
 import { AnalyticsChart } from '../components/AnalyticsChart';
@@ -39,4 +38,3 @@ export const Dashboard = () => {
     </div>
   );
 };
-```

@@ -1,5 +1,4 @@
 
-```typescript
 import React from 'react';
 import { SidebarProvider, SidebarEdgeToggle, useSidebar } from "@/components/ui/sidebar";
 import { AppSidebar } from './AppSidebar';
@@ -45,4 +44,3 @@ export const Layout = ({ children }: LayoutProps) => {
     </SidebarProvider>
   );
 };
-```
