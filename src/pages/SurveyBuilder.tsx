@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/drawer";
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from "sonner";
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 type QuestionType = 'text' | 'rating' | 'multiple-choice';
 
@@ -87,9 +88,12 @@ export const SurveyBuilder = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold">Survey Builder</h1>
-          <p className="text-muted-foreground">Create your survey by adding questions below.</p>
+        <div className="flex items-center gap-4">
+          <SidebarTrigger />
+          <div>
+            <h1 className="text-3xl font-bold">Survey Builder</h1>
+            <p className="text-muted-foreground">Create your survey by adding questions below.</p>
+          </div>
         </div>
         <Button onClick={handleSaveSurvey}>Save Survey</Button>
       </div>

@@ -2,12 +2,16 @@
 import React from 'react';
 import { MetricCard } from '../components/MetricCard';
 import { AnalyticsChart } from '../components/AnalyticsChart';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export const Dashboard = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-3xl font-bold text-foreground">AI Survey Dashboard</h1>
+        <div className="flex items-center gap-4">
+          <SidebarTrigger />
+          <h1 className="text-3xl font-bold text-foreground">AI Survey Dashboard</h1>
+        </div>
         <div className="text-sm text-muted-foreground">
           Last updated: {new Date().toLocaleTimeString()}
         </div>

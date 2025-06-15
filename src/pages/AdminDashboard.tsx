@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,6 +6,7 @@ import { MetricCard } from "@/components/MetricCard";
 import { AnalyticsChart } from "@/components/AnalyticsChart";
 import { Plus, Send, BarChart3, Database, Users } from "lucide-react";
 import { Link } from 'react-router-dom';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export const AdminDashboard = () => {
   const metrics = [
@@ -35,11 +35,14 @@ export const AdminDashboard = () => {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
-          <p className="text-muted-foreground">Manage surveys, monitor jobs, and analyze responses</p>
+        <div className="flex items-center gap-4">
+          <SidebarTrigger />
+          <div>
+            <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
+            <p className="text-muted-foreground">Manage surveys, monitor jobs, and analyze responses</p>
+          </div>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <Button asChild variant="outline" className="flex items-center gap-2">
             <Link to="/analytics">
               <BarChart3 size={16} />
