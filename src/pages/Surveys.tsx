@@ -16,7 +16,7 @@ const surveys = [
 export const Surveys = () => {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <h1 className="text-3xl font-bold text-foreground">Survey Management</h1>
         <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 flex items-center gap-2">
           <Link to="/admin/surveys/new">
