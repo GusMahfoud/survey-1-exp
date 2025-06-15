@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Sidebar,
@@ -16,7 +15,6 @@ const menuItems = [
   { title: "Dashboard", url: "/", icon: "📊" },
   { title: "Surveys", url: "/surveys", icon: "📝" },
   { title: "Analytics", url: "/analytics", icon: "📈" },
-  { title: "Settings", url: "/settings", icon: "⚙️" },
 ];
 
 export function AppSidebar() {

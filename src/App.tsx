@@ -26,7 +26,6 @@ const App = () => (
         <Route path="/admin/surveys" element={<Layout><Surveys /></Layout>} />
         <Route path="/admin/surveys/new" element={<Layout><SurveyBuilder /></Layout>} />
         <Route path="/admin/analytics" element={<Layout><Analytics /></Layout>} />
-        <Route path="/admin/settings" element={<Layout><Dashboard /></Layout>} />
         
         {/* Public survey response routes */}
         <Route path="/survey/:surveyId" element={<SurveyResponse />} />
@@ -36,7 +35,6 @@ const App = () => (
         <Route path="/" element={<Layout><AdminDashboard /></Layout>} />
         <Route path="/surveys" element={<Layout><Surveys /></Layout>} />
         <Route path="/analytics" element={<Layout><Analytics /></Layout>} />
-        <Route path="/settings" element={<Layout><Dashboard /></Layout>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
