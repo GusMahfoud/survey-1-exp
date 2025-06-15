@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
@@ -67,28 +66,6 @@ export const Analytics = () => {
           </CardContent>
         </Card>
       </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>AI-Powered Insights</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-lg border border-green-200">
-              <h3 className="font-semibold text-green-700 mb-2">🎯 Key Finding</h3>
-              <p className="text-sm text-muted-foreground">Customers who receive follow-up emails are 40% more likely to complete surveys</p>
-            </div>
-            <div className="p-4 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-200">
-              <h3 className="font-semibold text-blue-700 mb-2">📈 Trend Alert</h3>
-              <p className="text-sm text-muted-foreground">Response rates peak on Tuesday afternoons between 2-4 PM</p>
-            </div>
-            <div className="p-4 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-200">
-              <h3 className="font-semibold text-purple-700 mb-2">💡 Recommendation</h3>
-              <p className="text-sm text-muted-foreground">Consider A/B testing shorter survey forms to improve completion rates</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 };
