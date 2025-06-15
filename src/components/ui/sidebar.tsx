@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
-import { PanelLeft } from "lucide-react"
+import { ArrowLeft, ArrowRight, PanelLeft } from "lucide-react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -270,7 +270,7 @@ const SidebarTrigger = React.forwardRef<
       data-sidebar="trigger"
       variant="ghost"
       size="icon"
-      className={cn("h-7 w-7", className)}
+      className={cn("h-7 w-7 md:hidden", className)}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
@@ -283,6 +283,40 @@ const SidebarTrigger = React.forwardRef<
   )
 })
 SidebarTrigger.displayName = "SidebarTrigger"
+
+const SidebarEdgeToggle = React.forwardRef<
+  React.ElementRef<typeof Button>,
+  Omit<React.ComponentProps<typeof Button>, "children">
+>(({ className, ...props }, ref) => {
+  const { toggleSidebar, state, isMobile } = useSidebar()
+
+  if (isMobile) {
+    return null
+  }
+
+  return (
+    <Button
+      ref={ref}
+      variant="outline"
+      size="icon"
+      data-state={state}
+      className={cn(
+        "fixed top-1/2 z-20 hidden h-12 w-6 -translate-y-1/2 rounded-full border-2 bg-background/50 backdrop-blur-sm md:flex",
+        "transition-all duration-200 ease-in-out",
+        "data-[state=expanded]:left-[calc(var(--sidebar-width)-12px)]",
+        "data-[state=collapsed]:left-[calc(var(--sidebar-width-icon)-12px)]",
+        "hover:scale-110 hover:bg-background/80",
+        className
+      )}
+      onClick={toggleSidebar}
+      {...props}
+    >
+      {state === "expanded" ? <ArrowLeft size={16} /> : <ArrowRight size={16} />}
+      <span className="sr-only">Toggle Sidebar</span>
+    </Button>
+  )
+})
+SidebarEdgeToggle.displayName = "SidebarEdgeToggle"
 
 const SidebarRail = React.forwardRef<
   HTMLButtonElement,
@@ -758,5 +792,6 @@ export {
   SidebarRail,
   SidebarSeparator,
   SidebarTrigger,
+  SidebarEdgeToggle,
   useSidebar,
 }
