@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -10,6 +9,7 @@ import { Analytics } from "./pages/Analytics";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { RespondentSurvey } from "./pages/RespondentSurvey";
 import { SurveyResponse } from "./pages/SurveyResponse";
+import { SurveyBuilder } from "./pages/SurveyBuilder";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,8 +24,8 @@ const App = () => (
         <Route path="/admin" element={<Layout><AdminDashboard /></Layout>} />
         <Route path="/admin/dashboard" element={<Layout><AdminDashboard /></Layout>} />
         <Route path="/admin/surveys" element={<Layout><Surveys /></Layout>} />
+        <Route path="/admin/surveys/new" element={<Layout><SurveyBuilder /></Layout>} />
         <Route path="/admin/analytics" element={<Layout><Analytics /></Layout>} />
-        <Route path="/admin/jobs" element={<Layout><Dashboard /></Layout>} />
         <Route path="/admin/settings" element={<Layout><Dashboard /></Layout>} />
         
         {/* Public survey response routes */}
@@ -36,7 +36,6 @@ const App = () => (
         <Route path="/" element={<Layout><AdminDashboard /></Layout>} />
         <Route path="/surveys" element={<Layout><Surveys /></Layout>} />
         <Route path="/analytics" element={<Layout><Analytics /></Layout>} />
-        <Route path="/jobs" element={<Layout><Dashboard /></Layout>} />
         <Route path="/settings" element={<Layout><Dashboard /></Layout>} />
         <Route path="*" element={<NotFound />} />
       </Routes>

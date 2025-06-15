@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Sidebar,
@@ -9,14 +8,12 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { useLocation, Link } from 'react-router-dom';
 
 const menuItems = [
   { title: "Dashboard", url: "/", icon: "📊" },
   { title: "Surveys", url: "/surveys", icon: "📝" },
-  { title: "Job Queue", url: "/jobs", icon: "⚙️" },
   { title: "Analytics", url: "/analytics", icon: "📈" },
   { title: "Settings", url: "/settings", icon: "⚙️" },
 ];
@@ -33,7 +30,6 @@ export function AppSidebar() {
           </div>
           <span className="font-bold text-lg text-foreground">Survey Pro</span>
         </div>
-        <SidebarTrigger className="mt-2" />
       </div>
       <SidebarContent>
         <SidebarGroup>
@@ -42,7 +38,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={location.pathname === item.url}>
+                  <SidebarMenuButton asChild isActive={location.pathname === item.url || (item.url !== "/" && location.pathname.startsWith(item.url))}>
                     <Link to={item.url} className="flex items-center gap-3">
                       <span className="text-lg">{item.icon}</span>
                       <span>{item.title}</span>

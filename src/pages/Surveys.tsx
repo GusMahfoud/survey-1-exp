@@ -3,6 +3,8 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Link } from 'react-router-dom';
+import { Plus } from 'lucide-react';
 
 const surveys = [
   { id: 'SRV_001', title: 'Customer Satisfaction Q2', status: 'active', responses: 234, created: '2024-06-01' },
@@ -16,8 +18,11 @@ export const Surveys = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-foreground">Survey Management</h1>
-        <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-          Create New Survey
+        <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 flex items-center gap-2">
+          <Link to="/admin/surveys/new">
+            <Plus size={16} />
+            Create New Survey
+          </Link>
         </Button>
       </div>
 

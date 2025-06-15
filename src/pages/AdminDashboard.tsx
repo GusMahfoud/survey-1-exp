@@ -1,20 +1,18 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { MetricCard } from "@/components/MetricCard";
 import { AnalyticsChart } from "@/components/AnalyticsChart";
 import { SystemStatus } from "@/components/SystemStatus";
 import { JobQueue } from "@/components/JobQueue";
-import { Plus, Send, BarChart3, Database, Users, Clock } from "lucide-react";
+import { Plus, Send, BarChart3, Database, Users } from "lucide-react";
+import { Link } from 'react-router-dom';
 
 export const AdminDashboard = () => {
   const metrics = [
     { title: "Active Surveys", value: "12", change: "+2 this week", icon: "📊", trend: "up" as const },
     { title: "Total Responses", value: "1,247", change: "+18% vs last month", icon: "📝", trend: "up" as const },
-    { title: "Pending Jobs", value: "5", change: "3 running", icon: "⚙️", trend: "neutral" as const },
     { title: "Avg Response Rate", value: "67%", change: "+5% improvement", icon: "📈", trend: "up" as const },
   ];
 
@@ -43,19 +41,23 @@ export const AdminDashboard = () => {
           <p className="text-muted-foreground">Manage surveys, monitor jobs, and analyze responses</p>
         </div>
         <div className="flex gap-3">
-          <Button variant="outline" className="flex items-center gap-2">
-            <BarChart3 size={16} />
-            View Analytics
+          <Button asChild variant="outline" className="flex items-center gap-2">
+            <Link to="/analytics">
+              <BarChart3 size={16} />
+              View Analytics
+            </Link>
           </Button>
-          <Button className="flex items-center gap-2">
-            <Plus size={16} />
-            Create Survey
+          <Button asChild className="flex items-center gap-2">
+            <Link to="/admin/surveys/new">
+              <Plus size={16} />
+              Create Survey
+            </Link>
           </Button>
         </div>
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {metrics.map((metric, index) => (
           <MetricCard key={index} {...metric} />
         ))}
@@ -125,13 +127,9 @@ export const AdminDashboard = () => {
       </div>
 
       {/* Charts and System Status */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <Link to="/analytics" className="block hover:opacity-80 transition-opacity">
         <AnalyticsChart />
-        <SystemStatus />
-      </div>
-
-      {/* Job Queue */}
-      <JobQueue />
+      </Link>
     </div>
   );
 };

@@ -1,8 +1,6 @@
 
 import React from 'react';
 import { MetricCard } from '../components/MetricCard';
-import { SystemStatus } from '../components/SystemStatus';
-import { JobQueue } from '../components/JobQueue';
 import { AnalyticsChart } from '../components/AnalyticsChart';
 
 export const Dashboard = () => {
@@ -15,7 +13,7 @@ export const Dashboard = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <MetricCard
           title="Active Surveys"
           value={42}
@@ -30,30 +28,11 @@ export const Dashboard = () => {
           icon="💬"
           trend="up"
         />
-        <MetricCard
-          title="Queue Jobs"
-          value={18}
-          change="5 running, 13 pending"
-          icon="⚙️"
-          trend="neutral"
-        />
-        <MetricCard
-          title="System Uptime"
-          value="99.8%"
-          change="All systems operational"
-          icon="🟢"
-          trend="up"
-        />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-        <SystemStatus />
-        <JobQueue />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <AnalyticsChart />
-        <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-lg p-6 border border-border/40">
+        <div className="lg:col-span-2 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-lg p-6 border border-border/40">
           <h3 className="text-lg font-semibold mb-4 text-foreground">AI Insights</h3>
           <div className="space-y-3">
             <div className="p-3 bg-background/60 rounded-lg">
