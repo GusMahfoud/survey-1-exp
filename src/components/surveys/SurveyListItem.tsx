@@ -72,7 +72,7 @@ export const SurveyListItem = ({ survey, onDelete, onCopyLink, onOpenSendDialog 
                 <AlertDialogHeader>
                   <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete the "{survey.title}" survey, all of its responses, and associated analytics.
+                    This action cannot be undone. <strong>This will permanently delete the "{survey.title}" survey, all of its responses, and associated analytics.</strong>
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
