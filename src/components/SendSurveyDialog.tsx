@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Dialog,
@@ -15,11 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Copy } from 'lucide-react';
-
-interface Survey {
-  id: number;
-  title: string;
-}
+import { Survey } from '@/types/survey';
 
 interface SendSurveyDialogProps {
   survey: Survey | null;
