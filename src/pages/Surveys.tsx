@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from 'react-router-dom';
 import { Plus } from 'lucide-react';
-import { SidebarTrigger } from '@/components/ui/sidebar';
 
 const surveys = [
   { id: 'SRV_001', title: 'Customer Satisfaction Q2', status: 'active', responses: 234, created: '2024-06-01' },
@@ -18,7 +17,6 @@ export const Surveys = () => {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <SidebarTrigger />
           <h1 className="text-3xl font-bold text-foreground">Survey Management</h1>
         </div>
         <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 flex items-center gap-2">
