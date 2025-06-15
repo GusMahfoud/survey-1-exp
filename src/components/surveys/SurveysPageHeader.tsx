@@ -14,8 +14,8 @@ export const SurveysPageHeader = ({ onShowCreateForm }: SurveysPageHeaderProps) 
       <div className="flex items-center gap-4">
         <SidebarTrigger />
         <div>
-          <h2 className="text-2xl font-bold text-foreground">Survey Management</h2>
-          <p className="text-muted-foreground">Create, edit, and manage your surveys</p>
+          <h2 className="text-3xl font-bold text-foreground">Survey Management</h2>
+          <p className="text-lg text-muted-foreground mt-1">Create, edit, and manage your surveys</p>
         </div>
       </div>
       <Button onClick={onShowCreateForm} className="flex items-center gap-2">

@@ -2,10 +2,21 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Send, Edit, Trash2, Eye, Copy } from "lucide-react";
 import { Survey } from '@/types/survey';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface SurveyListItemProps {
   survey: Survey;
@@ -51,9 +62,30 @@ export const SurveyListItem = ({ survey, onDelete, onCopyLink, onOpenSendDialog 
             <Button variant="ghost" size="sm" onClick={() => navigate(`/admin/surveys/new`)} title="Edit Survey">
               <Edit size={16} />
             </Button>
-            <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600" onClick={() => onDelete(survey.id)} title="Delete Survey">
-              <Trash2 size={16} />
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600" title="Delete Survey">
+                  <Trash2 size={16} />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete the "{survey.title}" survey and all of its responses.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    className={buttonVariants({ variant: "destructive" })}
+                    onClick={() => onDelete(survey.id)}
+                  >
+                    Delete
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
       </CardContent>
