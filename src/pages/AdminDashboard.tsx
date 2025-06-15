@@ -36,6 +36,7 @@ export const AdminDashboard = () => {
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-4">
+          <SidebarTrigger />
           <div>
             <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
             <p className="text-muted-foreground">Manage surveys, monitor jobs, and analyze responses</p>
