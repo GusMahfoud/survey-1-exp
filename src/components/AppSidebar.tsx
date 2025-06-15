@@ -24,7 +24,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar className="border-r border-border/40">
-      <SidebarContent className="pt-16">
+      <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
